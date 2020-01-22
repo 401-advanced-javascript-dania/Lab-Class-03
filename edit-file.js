@@ -1,16 +1,15 @@
 'use strict';
 const fs=require('fs');
-const util=require('util');
 const readerWithCallback =(file,callback)=>{
     fs.readFile(file,(err,data)=>{
         if(err){callback(err)}
         else{callback(undefined,data.toString().trim());}
     });
 };
-const writerWithCallback =(file,callback)=>{
-    fs.writeFile(file,word,(err,data)=>{
+const writerWithCallback =(file,word,callback)=>{
+    fs.writeFile(file,word,(err)=>{
         if(err){callback(err)}
-        else{callback(undefined,data.toString().trim());}
+        else{callback(undefined)}
     });
 };
 module.exports={readerWithCallback,writerWithCallback};
