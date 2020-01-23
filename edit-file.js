@@ -7,9 +7,13 @@ const readerWithCallback =(file,callback)=>{
     });
 };
 const writerWithCallback =(file,word,callback)=>{
-    fs.writeFile(file,word,(err)=>{
+    fs.writeFile(file,word,(err,data)=>{
         if(err){callback(err)}
-        else{callback(undefined)}
+
+        else{
+            console.log(data)
+            callback(data)}
     });
 };
+
 module.exports={readerWithCallback,writerWithCallback};
