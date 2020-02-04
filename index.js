@@ -1,11 +1,11 @@
-'use strict';
-const fs=require('fs');
-const util =require('util');
 
-const readerAndWriter =require('./edit-file');
+const fs = require('fs');
+const util = require('util');
+
+const readerAndWriter = require('./edit-file');
 const file = `${__dirname}/files/data/person.json`;
 // const file='/mnt/c/Users/std21/Lab-Class-03/files/data/person.json';
-//fs function 
+//fs function
 
 // fs.readFile(process.argv[2],(err,data)=>{
 //     if(err){throw err;}
@@ -15,7 +15,7 @@ const file = `${__dirname}/files/data/person.json`;
 //     if (err) throw err;
 //     console.log('Replaced!');
 //   });
-// // callback function 
+// // callback function
 // readerAndWriter.readerWithCallback(process.argv[2], (err, data) => {
 //     if (err) { throw err; }
 //     let obj=JSON.parse(data);
@@ -34,24 +34,24 @@ const file = `${__dirname}/files/data/person.json`;
 // .then((data)=>{
 // console.log('done',data )})
 // .catch(err=>{throw err;})
-readerAndWriter.readFile(process.argv[2])
-    .then(data=>{
-        return JSON.parse(data)
-    })
-    .then(data=>writerWithPromise(file,data))
-    .catch(err=>console.error(err))
-    const writeFile =util.promisify(fs.writeFile);
+readerAndWriter.readFile(file)
+  .then(data=>{
+    return JSON.parse(data);
+  })
+  .then(data=>writerWithPromise(file,data))
+  .catch(err=>console.error(err));
+const writeFile = util.promisify(fs.writeFile);
 
-    const writerWithPromise=(file,data)=>{
-        console.log('dataBeforModifing',data)
-        data.firstName='dania';
-        data.married=true;
-        data.kids=3;
-        let dataAfterModifing=JSON.stringify(data);
-        writeFile(file,dataAfterModifing)
-        let data3=JSON.parse(dataAfterModifing)
-        console.log('dataAfterModifing',data3)
-    }
+const writerWithPromise = (file,data)=>{
+  console.log('dataBeforModifing',data);
+  data.firstName = 'dania';
+  data.married = false;
+  data.kids = 3;
+  let dataAfterModifing = JSON.stringify(data);
+  writeFile(file,dataAfterModifing);
+  let data3 = JSON.parse(dataAfterModifing);
+  console.log('dataAfterModifing',data3);
+};
 
 
 //  on terminal type (node index.js /mnt/c/Users/std21/Lab-Class-03/files/data/person.json)
